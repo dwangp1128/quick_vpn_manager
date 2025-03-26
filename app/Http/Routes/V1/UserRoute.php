@@ -23,6 +23,7 @@ class UserRoute
             $router->post('/getQuickLoginUrl', 'V1\\User\\UserController@getQuickLoginUrl');
             $router->get ('/getActiveSession', 'V1\\User\\UserController@getActiveSession');
             $router->post('/removeActiveSession', 'V1\\User\\UserController@removeActiveSession');
+            
             // Order
             $router->post('/order/save', 'V1\\User\\OrderController@save');
             $router->post('/order/checkout', 'V1\\User\\OrderController@checkout');
@@ -31,22 +32,34 @@ class UserRoute
             $router->get ('/order/fetch', 'V1\\User\\OrderController@fetch');
             $router->get ('/order/getPaymentMethod', 'V1\\User\\OrderController@getPaymentMethod');
             $router->post('/order/cancel', 'V1\\User\\OrderController@cancel');
+            
             // Plan
             $router->get ('/plan/fetch', 'V1\\User\\PlanController@fetch');
+            
             // Invite
             $router->get ('/invite/save', 'V1\\User\\InviteController@save');
             $router->get ('/invite/fetch', 'V1\\User\\InviteController@fetch');
             $router->get ('/invite/details', 'V1\\User\\InviteController@details');
+            
             // Notice
             $router->get ('/notice/fetch', 'V1\\User\\NoticeController@fetch');
+            $router->post('/notice/readMark', 'V1\\User\\NoticeController@markNoticeAsRead');
+            
             // Ticket
             $router->post('/ticket/reply', 'V1\\User\\TicketController@reply');
             $router->post('/ticket/close', 'V1\\User\\TicketController@close');
             $router->post('/ticket/save', 'V1\\User\\TicketController@save');
             $router->get ('/ticket/fetch', 'V1\\User\\TicketController@fetch');
             $router->post('/ticket/withdraw', 'V1\\User\\TicketController@withdraw');
+            
             // Server
             $router->get ('/server/fetch', 'V1\\User\\ServerController@fetch');
+            
+            // Node
+            $router->get ('/node/countries', 'V1\\User\\NodeController@fetchCountries');
+            $router->post('/node/locationGroup', 'V1\\User\\NodeController@fetchLocationGroup');
+            $router->post('/node/info', 'V1\\User\\NodeController@fetchServerInfo');
+
             // Coupon
             $router->post('/coupon/check', 'V1\\User\\CouponController@check');
             // Telegram

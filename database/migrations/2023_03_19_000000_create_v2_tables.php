@@ -316,14 +316,17 @@ return new class extends Migration {
         // Notice
         if (!Schema::hasTable('v2_notice')) {
             Schema::create('v2_notice', function (Blueprint $table) {
-                $table->integer('id', true);
-                $table->string('title');
-                $table->text('content');
-                $table->boolean('show')->default(false);
-                $table->string('img_url')->nullable();
+                $table->integer('id', true)->comment("notice id");
+                $table->string('title')->comment(comment: "notice title");
+                $table->text('content')->comment(comment: "notice content");
+                $table->boolean('show')->default(false)->comment(comment: "notice status: enable: true, disable: false");
+                $table->string('img_url')->nullable()->comment("image url");
                 $table->string('tags')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->String('readmarks')->comment("Stores user read status")->nullable();
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
+                $table->comment("service message table");
             });
         }
 

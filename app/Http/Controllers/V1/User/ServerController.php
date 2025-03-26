@@ -28,4 +28,16 @@ class ServerController extends Controller
             'data' => $data
         ])->header('ETag', "\"{$eTag}\"");
     }
+
+    public function fetchLocation(Request $request) {
+
+    }
+
+    public function fetchLocationGroup(Request $request) {
+        
+    }
+
+    public function fetchServerInfo(Request $request) {
+        
+    }
 }

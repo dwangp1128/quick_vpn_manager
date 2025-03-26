@@ -12,6 +12,7 @@ use App\Models\Plan;
 use App\Models\Ticket;
 use App\Models\User;
 use App\Services\AuthService;
+use App\Services\NoticeService;
 use App\Services\UserService;
 use App\Utils\CacheKey;
 use App\Utils\Helper;
@@ -93,18 +94,31 @@ class UserController extends Controller
                 'discount',
                 'commission_rate',
                 'telegram_id',
-                'uuid'
+                'uuid',
+                'u',
+                'd',
             ])
             ->first();
+
         if (!$user) {
             return $this->fail([400, __('The user does not exist')]);
         }
         $user['avatar_url'] = 'https://cdn.v2ex.com/gravatar/' . md5($user->email) . '?s=64&d=identicon';
+        if ($user->plan_id) {
+            $user['plan'] = Plan::find($user->plan_id);
+            // if (!$user['plan']) {
+                // return $this->fail([400, __('Subscription plan does not exist')]);
+            // }
+        }
+        $userService = new UserService();
+        $user['reset_day'] = $userService->getResetDay($user);
+
         return $this->success($user);
     }
 
     public function getStat(Request $request)
     {
+        $userId = $request->user()->id;
         $stat = [
             Order::where('status', 0)
                 ->where('user_id', $request->user()->id)
@@ -113,8 +127,10 @@ class UserController extends Controller
                 ->where('user_id', $request->user()->id)
                 ->count(),
             User::where('invite_user_id', $request->user()->id)
-                ->count()
+                ->count(),
+            NoticeService::getUnreadCountByUserId($userId),
         ];
+
         return $this->success($stat);
     }
 
