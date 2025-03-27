@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'v2_order';
-    protected $dateFormat = 'U';
+    // protected $dateFormat = 'U';
     protected $guarded = ['id'];
     protected $casts = [
         'created_at' => 'timestamp',

@@ -9,7 +9,7 @@ class ServerCountries extends Model
     //
     protected $table = 'v2_server_countries';
 
-    protected $dateFormat = 'U';
+    // protected $dateFormat = 'U';
 
     protected $casts = [
         'id' => 'string',

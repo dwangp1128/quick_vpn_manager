@@ -9,5 +9,5 @@ class ServerLocation extends Model
     //
     protected $table = 'v2_server_location';
 
-    protected $dateFormat = 'U';
+    // protected $dateFormat = 'U';
 }

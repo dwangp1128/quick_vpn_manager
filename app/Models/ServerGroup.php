@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ServerGroup extends Model
 {
     protected $table = 'v2_server_group';
-    protected $dateFormat = 'U';
+    // protected $dateFormat = 'U';
     protected $casts = [
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp'

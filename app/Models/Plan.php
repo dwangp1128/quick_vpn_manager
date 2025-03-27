@@ -13,7 +13,7 @@ class Plan extends Model
     use HasFactory;
 
     protected $table = 'v2_plan';
-    protected $dateFormat = 'U';
+    // protected $dateFormat = 'U';
 
     // 定义流量重置方式
     public const RESET_TRAFFIC_FOLLOW_SYSTEM = 0;    // 跟随系统设置

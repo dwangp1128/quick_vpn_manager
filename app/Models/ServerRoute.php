@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ServerRoute extends Model
 {
     protected $table = 'v2_server_route';
-    protected $dateFormat = 'U';
+    // protected $dateFormat = 'U';
     protected $guarded = ['id'];
     protected $casts = [
         'created_at' => 'timestamp',

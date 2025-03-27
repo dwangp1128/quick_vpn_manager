@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TicketMessage extends Model
 {
     protected $table = 'v2_ticket_message';
-    protected $dateFormat = 'U';
+    // protected $dateFormat = 'U';
     protected $guarded = ['id'];
     protected $casts = [
         'created_at' => 'timestamp',
