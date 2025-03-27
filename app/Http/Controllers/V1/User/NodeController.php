@@ -23,14 +23,11 @@ class NodeController extends Controller
         return $this->success($data);
     }
 
-    public function fetchLocationGroup(Request $request) {
-        
-    }
-
     public function fetchServerInfo(Request $request) {
         $userId = $request->user()->id;
-        $country_id = $request->input('country_id');
-        $server = NodeService::getRandomServerInfo($country_id);
-        return $this->success($server);
+        $country_id = $request->input('countryId');
+        $server = NodeService::getRandomServerInfo($userId, country_id: $country_id);
+        $nodeContent = NodeService::getContentFromServerInfo($userId, $server);
+        return $this->success($nodeContent);
     }
 }

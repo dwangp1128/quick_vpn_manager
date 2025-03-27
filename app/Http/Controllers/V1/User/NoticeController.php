@@ -13,7 +13,7 @@ class NoticeController extends Controller
     public function fetch(Request $request)
     {
         $current = $request->input('current') ? $request->input('current') : 1;
-        $pageSize = $request->input('page_size') ? $request->input('page_size') : 10;
+        $pageSize = $request->input('page_size') ? $request->input('page_size') : 5;
         // $pageSize = 5;
 
         $model = Notice::where('show', true) -> orderBy('sort', 'ASC');
@@ -53,13 +53,20 @@ class NoticeController extends Controller
             unset($notice->readmarks);
             return $notice;
         });
-        
-        return $this->success( [
+
+        return response([
             'data' => $model,
             'total' => $total,
             'current' => $current,
             'pageSize' => $pageSize
         ]);
+        
+        // return $this->success( [
+        //     'data' => $model,
+        //     'total' => $total,
+        //     'current' => $current,
+        //     'pageSize' => $pageSize
+        // ]);
     }
 
     public function markNoticeAsRead(Request $request)  {
