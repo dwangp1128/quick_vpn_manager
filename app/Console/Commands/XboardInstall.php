@@ -112,11 +112,11 @@ class XboardInstall extends Command
                 while (!$isMysqlValid) {
                     $envConfig = [
                         'DB_CONNECTION' => 'mysql',
-                        'DB_HOST' => text(label: "请输入数据库地址", default: '127.0.0.1', required: true),
+                        'DB_HOST' => text(label: "请输入数据库地址", default: '192.168.144.141', required: true),
                         'DB_PORT' => text(label: '请输入数据库端口', default: '3306', required: true),
                         'DB_DATABASE' => text(label: '请输入数据库名', default: 'xboard', required: true),
                         'DB_USERNAME' => text(label: '请输入数据库用户名', default: 'root', required: true),
-                        'DB_PASSWORD' => text(label: '请输入数据库密码', required: false),
+                        'DB_PASSWORD' => text(label: '请输入数据库密码', default: 'password', required: false),
                     ];
                     try {
                         Config::set("database.default", 'mysql');

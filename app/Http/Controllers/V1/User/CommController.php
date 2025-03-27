@@ -38,7 +38,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/reward.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => true,
+                    'show' => false,
                 ],
                 [
                     'name' => '免费领会员',
@@ -46,7 +46,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/member.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => true,
+                    'show' => false,
                 ],
                 [
                     'name' => '大家都在玩',
@@ -54,7 +54,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/hot.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => true,
+                    'show' => false,
                 ],
                 [
                     'name' => '消息中心',
@@ -78,7 +78,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/customer_service.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => true,
+                    'show' => false,
                 ],
                 [
                     'name' => '上传日志',
@@ -86,7 +86,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/upload_log.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => true,
+                    'show' => false,
                 ],
                 [
                     'name' => '登出',

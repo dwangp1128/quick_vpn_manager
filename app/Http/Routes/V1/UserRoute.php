@@ -43,7 +43,8 @@ class UserRoute
             
             // Notice
             $router->get ('/notice/fetch', 'V1\\User\\NoticeController@fetch');
-            $router->post('/notice/readMark', 'V1\\User\\NoticeController@markNoticeAsRead');
+            $router->get ('/notice/fetchNoticeList', 'V1\\User\\NoticeController@fetchNoticeList');
+            $router->post ('/notice/readMark', 'V1\\User\\NoticeController@markNoticeAsRead');
             
             // Ticket
             $router->post('/ticket/reply', 'V1\\User\\TicketController@reply');

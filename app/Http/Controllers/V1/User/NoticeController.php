@@ -13,9 +13,9 @@ class NoticeController extends Controller
     public function fetch(Request $request)
     {
         $current = $request->input('current') ? $request->input('current') : 1;
-        
-        $pageSize = 5;
-        
+        $pageSize = $request->input('page_size') ? $request->input('page_size') : 10;
+        // $pageSize = 5;
+
         $model = Notice::where('show', true) -> orderBy('sort', 'ASC');
         
         $total = $model->count();
@@ -25,7 +25,40 @@ class NoticeController extends Controller
         
         return response([
             'data' => $res,
-            'total' => $total
+            'total' => $total,
+            'current' => $current
+        ]);
+    }
+
+    public function fetchNoticeList(Request $request)
+    {
+        // Ensure 'current' and 'pageSize' are integers
+        $current = intval($request->input('current', 1));
+        $pageSize = intval($request->input('pageSize', 10));
+        // $pageSize = 5;
+        $userId = $request->user()->id;
+
+        // Get the total count of all notices
+        $total = Notice::where('show', true)->count();
+        
+        $model = Notice::where('show', true)
+            -> orderBy('sort', 'ASC')
+            ->forPage($current, $pageSize)
+            ->get();
+        
+        // Process each notice to determine if it's read
+        $model->transform(function ($notice) use ($userId) {
+            $readmarks = explode(',', $notice->readmarks ?? '');
+            $notice->is_read = in_array($userId, $readmarks); // Check if user has read it
+            unset($notice->readmarks); // Remove the field
+            return $notice;
+        });
+        
+        return $this->success( [
+            'data' => $model,
+            'total' => $total,
+            'current' => $current,
+            'pageSize' => $pageSize
         ]);
     }
 

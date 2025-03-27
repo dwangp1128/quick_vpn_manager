@@ -5,3 +5,6 @@ installSQLite:
 
 watchLog:
 	tail -f storage/logs/laravel-2025-03-15.log
+
+seed:
+	php artisan db:seed --class=ServerCountriesTableSeeder
