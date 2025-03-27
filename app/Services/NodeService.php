@@ -73,7 +73,7 @@ class NodeService
     }
 
     public static function getSupportedCountries() {
-        return ServerCountries::select('id', 'alpha3', 'name', 'native_name', 'region', 'emoji_flag', 'show')->where('show', true)->get();
+        return ServerCountries::select('id', 'alpha3', 'native_name', 'region', 'emoji_flag', 'show')->where('show', true)->get();
     }
 
     public static function getRandomServerInfo($country_id) {
