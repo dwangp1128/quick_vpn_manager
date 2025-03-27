@@ -20,6 +20,12 @@ class NoticeService
             $notice->save();
         }
 
+        $readmarks = explode(',', $notice->readmarks ?? '');
+        $notice->is_read = in_array($userId, $readmarks);
+        unset($notice->readmarks);
+
+        return $notice;
+
         // $readmarks = $notice->readmarks ? json_decode($notice->readmarks, true) : [];
     
         // if (!in_array($userId, $readmarks)) {
@@ -38,9 +44,14 @@ class NoticeService
         switch ($databaseDriver) {
             case 'mysql':
                 // MySQL: Use FIND_IN_SET to check if userId is NOT in the readmarks field
-                $unreadCount = Notice::whereNotNull('readmarks')
-                                     ->whereRaw('FIND_IN_SET(?, readmarks) = 0', [$userId])
-                                     ->count();
+                // $unreadCount = Notice::whereNotNull('readmarks')
+                //                      ->whereRaw('FIND_IN_SET(?, readmarks) = 0', [$userId])
+                //                      ->count();
+
+                $unreadCount = Notice::where('show', 1)->where(function($query) use ($userId) {
+                    $query->whereRaw('FIND_IN_SET(?, readmarks) = 0', [$userId])
+                        ->orWhereNull('readmarks');
+                    })->count();
                 break;
     
             case 'pgsql':

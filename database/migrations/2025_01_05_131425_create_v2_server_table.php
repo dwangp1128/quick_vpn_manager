@@ -301,8 +301,9 @@ return new class extends Migration {
             $table->text('tlsSettings')->nullable();
             $table->boolean('show')->default(false);
             $table->integer('sort')->nullable();
-            $table->integer('created_at');
-            $table->integer('updated_at');
+            $table->timestamps();
+            // $table->integer('created_at');
+            // $table->integer('updated_at');
         });
 
         Schema::create('v2_server_vless', function (Blueprint $table) {
@@ -325,8 +326,9 @@ return new class extends Migration {
             $table->string('rate', 11);
             $table->boolean('show')->default(false);
             $table->integer('sort')->nullable();
-            $table->integer('created_at');
-            $table->integer('updated_at');
+            $table->timestamps();
+            // $table->integer('created_at');
+            // $table->integer('updated_at');
         });
 
         Schema::create('v2_server_shadowsocks', function (Blueprint $table) {
@@ -347,8 +349,9 @@ return new class extends Migration {
             $table->string('obfs_settings')->nullable();
             $table->tinyInteger('show')->default(0);
             $table->integer('sort')->nullable();
-            $table->integer('created_at');
-            $table->integer('updated_at');
+            $table->timestamps();
+            // $table->integer('created_at');
+            // $table->integer('updated_at');
         });
 
         Schema::create('v2_server_hysteria', function (Blueprint $table) {
@@ -373,8 +376,9 @@ return new class extends Migration {
             $table->integer('down_mbps');
             $table->string('server_name', 64)->nullable();
             $table->boolean('insecure')->default(false);
-            $table->integer('created_at');
-            $table->integer('updated_at');
+            $table->timestamps();
+            // $table->integer('created_at');
+            // $table->integer('updated_at');
         });
 
         // Migrate data back to old tables

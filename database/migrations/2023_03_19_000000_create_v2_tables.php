@@ -19,8 +19,9 @@ return new class extends Migration {
                 $table->char('trade_no', 36);
                 $table->integer('order_amount');
                 $table->integer('get_amount');
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -32,8 +33,9 @@ return new class extends Migration {
                 $table->char('code', 32);
                 $table->boolean('status')->default(false);
                 $table->integer('pv')->default(0);
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -47,8 +49,9 @@ return new class extends Migration {
                 $table->text('body')->comment('內容');
                 $table->integer('sort')->nullable()->comment('排序');
                 $table->boolean('show')->default(false)->comment('顯示');
-                $table->integer('created_at')->comment('創建時間');
-                $table->integer('updated_at')->comment('更新時間');
+                $table->timestamps();
+                // $table->integer('created_at')->comment('創建時間');
+                // $table->integer('updated_at')->comment('更新時間');
             });
         }
 
@@ -74,8 +77,9 @@ return new class extends Migration {
                 $table->integer('reset_price')->nullable();
                 $table->integer('reset_traffic_method')->nullable()->comment('重置流量方式:0跟随系统设置、1每月1号、2按月重置、3不重置、4每年1月1日、5按年重置');
                 $table->integer('capacity_limit')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -84,8 +88,9 @@ return new class extends Migration {
             Schema::create('v2_server_group', function (Blueprint $table) {
                 $table->integer('id', true);
                 $table->string('name');
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -97,8 +102,9 @@ return new class extends Migration {
                 $table->text('match');
                 $table->string('action', 11);
                 $table->string('action_value')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -112,8 +118,9 @@ return new class extends Migration {
                 $table->bigInteger('d');
                 $table->char('record_type', 1)->comment('d day m month');
                 $table->integer('record_at')->index('record_at')->comment('记录时间');
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
 
                 $table->unique(['server_id', 'server_type', 'record_at'], 'server_id_server_type_record_at');
             });
@@ -152,8 +159,9 @@ return new class extends Migration {
                 $table->char('token', 32);
                 $table->bigInteger('expired_at')->nullable()->default(0);
                 $table->text('remarks')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -165,8 +173,9 @@ return new class extends Migration {
                 $table->string('subject');
                 $table->string('template_name');
                 $table->text('error')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -182,8 +191,9 @@ return new class extends Migration {
                 $table->text('data')->nullable();
                 $table->string('ip', 128)->nullable();
                 $table->text('context')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -202,8 +212,9 @@ return new class extends Migration {
                 $table->integer('register_count');
                 $table->integer('invite_count');
                 $table->string('transfer_used_total', 32);
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
 
                 if (config('database.default') !== 'sqlite') {
                     $table->unique(['record_at']);
@@ -221,8 +232,9 @@ return new class extends Migration {
                 $table->bigInteger('d');
                 $table->char('record_type', 2);
                 $table->integer('record_at');
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
 
                 // 如果是不是sqlite才添加多个索引
                 if (config('database.default') !== 'sqlite') {
@@ -239,8 +251,9 @@ return new class extends Migration {
                 $table->integer('user_id');
                 $table->integer('ticket_id');
                 $table->text('message');
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -269,8 +282,9 @@ return new class extends Migration {
                 $table->integer('commission_balance')->default(0);
                 $table->integer('actual_commission_balance')->nullable()->comment('实际支付佣金');
                 $table->integer('paid_at')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -288,8 +302,9 @@ return new class extends Migration {
                 $table->decimal('handling_fee_percent', 5)->nullable();
                 $table->boolean('enable')->default(false);
                 $table->integer('sort')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -308,8 +323,9 @@ return new class extends Migration {
                 $table->string('limit_period')->nullable();
                 $table->integer('started_at');
                 $table->integer('ended_at');
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -322,7 +338,7 @@ return new class extends Migration {
                 $table->boolean('show')->default(false)->comment(comment: "notice status: enable: true, disable: false");
                 $table->string('img_url')->nullable()->comment("image url");
                 $table->string('tags')->nullable();
-                $table->String('readmarks')->comment("Stores user read status")->nullable();
+                $table->String('readmarks')->index('index_readmarks')->nullable()->comment("Stores user read status");
                 $table->timestamps();
                 // $table->integer('created_at');
                 // $table->integer('updated_at');
@@ -339,8 +355,9 @@ return new class extends Migration {
                 $table->integer('level');
                 $table->integer('status')->default(0)->comment('0:已开启 1:已关闭');
                 $table->integer('reply_status')->default(1)->comment('0:待回复 1:已回复');
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -363,8 +380,9 @@ return new class extends Migration {
                 $table->integer('down_mbps');
                 $table->string('server_name', 64)->nullable();
                 $table->boolean('insecure')->default(false);
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -387,8 +405,9 @@ return new class extends Migration {
                 $table->string('obfs_settings')->nullable();
                 $table->tinyInteger('show')->default(0);
                 $table->integer('sort')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
         // Server Trojan
@@ -408,8 +427,9 @@ return new class extends Migration {
                 $table->string('server_name')->nullable();
                 $table->boolean('show')->default(false)->comment('是否显示');
                 $table->integer('sort')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -433,8 +453,9 @@ return new class extends Migration {
                 $table->string('rate', 11);
                 $table->boolean('show')->default(false);
                 $table->integer('sort')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 
@@ -460,8 +481,9 @@ return new class extends Migration {
                 $table->text('dnsSettings')->nullable();
                 $table->boolean('show')->default(false);
                 $table->integer('sort')->nullable();
-                $table->integer('created_at');
-                $table->integer('updated_at');
+                $table->timestamps();
+                // $table->integer('created_at');
+                // $table->integer('updated_at');
             });
         }
 

@@ -49,8 +49,8 @@ class NoticeController extends Controller
         // Process each notice to determine if it's read
         $model->transform(function ($notice) use ($userId) {
             $readmarks = explode(',', $notice->readmarks ?? '');
-            $notice->is_read = in_array($userId, $readmarks); // Check if user has read it
-            unset($notice->readmarks); // Remove the field
+            $notice->is_read = in_array($userId, $readmarks);
+            unset($notice->readmarks);
             return $notice;
         });
         
@@ -64,15 +64,15 @@ class NoticeController extends Controller
 
     public function markNoticeAsRead(Request $request)  {
 
-        $noticeId = $request->input('notice_id');
+        $noticeId = $request->input('noticeId');
         $userId = $request->user()->id;
 
         $user = User::findOrFail($userId);
 
-        NoticeService::markNoticeAsRead($user->id, $noticeId);
+        $result = NoticeService::markNoticeAsRead($user->id, $noticeId);
 
         return response([
-            'message' => 'Notice marked as read'
+            'data' => $result
         ]);
     }
 }
