@@ -297,4 +297,9 @@ class Server extends Model
         return ServerRoute::whereIn('id', $this->route_ids)->get();
     }
 
+    public function country()
+    {
+        return $this->belongsTo(ServerCountries::class, 'country_id');
+    }
+
 }

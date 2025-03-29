@@ -75,8 +75,20 @@ class NodeService
     }
 
     public static function getSupportedCountries() {
-        return ServerCountries::select('id', 'alpha3', 'native_name', 'region', 'emoji_flag', 'show')->where('show', true)->get();
+
+        return ServerCountries::select('id', 'alpha3', 'native_name', 'region', 'emoji_flag', 'show')
+        ->where('show', true)->get();
     }
+
+    public static function getSupportedCountriesByUser(User $user) {
+        return ServerCountries::select('v2_server_countries.id', 'alpha3', 'native_name', 'region', 'emoji_flag', 'v2_server_countries.show')
+        ->join('v2_server', 'v2_server.country_id', '=', 'v2_server_countries.id')
+        ->distinct()
+        ->whereJsonContains('v2_server.group_ids', (string) $user->group_id)
+        ->where('v2_server.show', true)
+        ->get();
+    }
+
 
 
     /**
@@ -84,29 +96,40 @@ class NodeService
      */
     public static function getAvailableServerWithCountryId(User $user, $countryId)
     {
-        return Server::where('country_id', $countryId)
-        ->whereJsonContains('group_ids', (string) $user->group_id)
-        ->where('show', operator: true)
-        ->orderBy('sort', 'ASC')
-        ->inRandomOrder()->first();
-        // return Server::whereJsonContains('group_ids', (string) $user->group_id)
-        //     ->where('country_id', $countryId)
-        //     ->where('show', operator: true)
-        //     ->orderBy('sort', 'ASC')
-        //     ->inRandomOrder()->first();
 
-            // ->transform(function (Server $server) use ($user) {
-            //     $server->loadParentCreatedAt();
-            //     $server->handlePortAllocation();
-            //     $server->loadServerStatus();
-            //     if ($server->type === 'shadowsocks') {
-            //         $server->server_key = Helper::getServerKey($server->created_at, 16);
-            //     }
-            //     $server->generateShadowsocksPassword($user);
+        $serverQuery = Server::whereJsonContains('group_ids', (string) $user->group_id)
+            ->where('show', true)
+            ->orderBy('sort', 'ASC');
 
-            //     return $server;
-            // });
+        if ($countryId) {
+            $serverQuery->where('country_id', $countryId);
+        }
 
+        $server = $serverQuery->inRandomOrder()->first();
+
+        return $server;
+
+        if ($countryId) {
+            $server = Server::where('country_id', $countryId)
+            ->whereJsonContains('group_ids', (string) $user->group_id)
+            ->where('show', operator: true)
+            ->orderBy('sort', 'ASC')
+            ->inRandomOrder()->first();
+        } else {
+            $server = Server::whereJsonContains('group_ids', (string) $user->group_id)
+            ->where('show', operator: true)
+            ->orderBy('sort', 'ASC')
+            ->inRandomOrder()->first();
+        }
+
+        return $server;
+
+        #
+        // return Server::where('country_id', $countryId)
+        // ->whereJsonContains('group_ids', (string) $user->group_id)
+        // ->where('show', operator: true)
+        // ->orderBy('sort', 'ASC')
+        // ->inRandomOrder()->first();
     }
 
     public static function getRandomServerInfo($userId, $country_id) {

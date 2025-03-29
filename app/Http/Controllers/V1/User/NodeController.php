@@ -14,10 +14,14 @@ class NodeController extends Controller
 {
 
     public function fetchCountries(Request $request) {
+        $userId = $request->user()->id;
+
+        $user = User::findOrFail($userId);
 
         $data = [
             'regions' => NodeService::getSupportRegions(),
-            'contries' => NodeService::getSupportedCountries(),
+            // 'contries' => NodeService::getSupportedCountries(),
+            'contries' => NodeService::getSupportedCountriesByUser($user),
         ];
 
         return $this->success($data);

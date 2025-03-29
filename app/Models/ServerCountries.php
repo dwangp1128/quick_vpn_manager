@@ -17,4 +17,9 @@ class ServerCountries extends Model
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp'
     ];
+
+    public function servers()
+    {
+        return $this->hasMany(Server::class, 'country_id');
+    }
 }

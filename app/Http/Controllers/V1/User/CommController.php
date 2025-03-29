@@ -32,13 +32,14 @@ class CommController extends Controller
             'app_url_drawin' => 'https://baidu.com',
             
             'menus' => array_values([
+                
                 [
                     'name' => '推荐有奖',
                     'label' => 'reward',
                     'iconUrl' => 'assets/images/pngs/reward.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => false,
+                    'show' => true,
                 ],
                 [
                     'name' => '免费领会员',
@@ -46,7 +47,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/member.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => false,
+                    'show' => true,
                 ],
                 [
                     'name' => '大家都在玩',
@@ -54,7 +55,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/hot.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => false,
+                    'show' => true,
                 ],
                 [
                     'name' => '消息中心',
@@ -78,7 +79,7 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/customer_service.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => false,
+                    'show' => true,
                 ],
                 [
                     'name' => '上传日志',
@@ -86,7 +87,15 @@ class CommController extends Controller
                     'iconUrl' => 'assets/images/pngs/upload_log.png',
                     'routePath' => '',
                     'order' => 1,
-                    'show' => false,
+                    'show' => true,
+                ],
+                [
+                    'name' => 'settings',
+                    'label' => 'settings',
+                    'iconUrl' => 'assets/images/pngs/reward.png',
+                    'routePath' => '/settings',
+                    'order' => 1,
+                    'show' => true,
                 ],
                 [
                     'name' => '登出',
